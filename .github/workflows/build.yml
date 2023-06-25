@@ -21,5 +21,8 @@ jobs:
         run: npm ci
       - name: npm run build
         run: npm run build
-      - name: npm run build
-        run: echo 'HELLO GITHUB ACTIONS'
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          role-to-assume: arn:aws:iam::471585674330:role/github-actions-deploy
+          aws-region: us-east-1
