@@ -1,4 +1,4 @@
-name: 'build'
+name: 'build and deploy'
 on:
   workflow_dispatch:
 
@@ -11,7 +11,7 @@ jobs:
     name: npm build
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repo's default branch
+      - name: Check out repos default branch
         uses: actions/checkout@v3
       - name: Setup Node
         uses: actions/setup-node@v3
@@ -22,10 +22,10 @@ jobs:
         run: npm ci
       - name: npm run build
         run: npm run build
-      - name: Configure AWS Credentials
+      - name: aws credentials
         uses: aws-actions/configure-aws-credentials@v2
         with:
           role-to-assume: arn:aws:iam::471585674330:role/github-actions-deploy
           aws-region: us-east-1
-      - name: deploy CDK stack
+      - name: deploy cdk stack
         run: npx cdk deploy --all --require-approval never
