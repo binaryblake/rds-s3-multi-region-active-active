@@ -1,16 +1,14 @@
 import * as cdk from 'aws-cdk-lib';
+import { Bucket } from 'aws-cdk-lib/aws-s3';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
 
 export class RdsS3MultiRegionActiveActiveStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const bucket = new Bucket(this, 'bucket', {
+      removalPolicy: cdk.RemovalPolicy.DESTROY
+    });
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'RdsS3MultiRegionActiveActiveQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
   }
 }
